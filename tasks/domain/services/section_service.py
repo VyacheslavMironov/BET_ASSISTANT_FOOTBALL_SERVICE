@@ -1,20 +1,20 @@
 from tasks.domain.abstract_services.abstract_section_service import AbstractSectionService
 from tasks.domain.entities.section import Section
-# from tasks.infrastructure.database.sport_repository import SportRepository
-# from tasks.infrastructure.rapid.query_sport import SportQuery
+from tasks.infrastructure.database.section_repository import SectionRepository
+from tasks.infrastructure.rapid.query_section import SectionQuery
 
 
-class SportService(AbstractSportService):
-    # __Repository: SportRepository
-    # __Rapid: SportQuery
+class SectionService(AbstractSectionService):
+    __Repository: SectionRepository
+    __Rapid: SectionQuery
 
     def __init__(self) -> None:
-        self.__Repository = SportRepository()
-        self.__Rapid = SportQuery()
+        self.__Repository = SectionRepository()
+        self.__Rapid = SectionQuery()
         super().__init__()
 
     def query_all(self) -> dict or list:
         return self.__Rapid.get_date()
 
-    def add(self, context: Sport) -> Sport:
+    def add(self, context: Section) -> Section:
         return self.__Repository.add(context=context)
