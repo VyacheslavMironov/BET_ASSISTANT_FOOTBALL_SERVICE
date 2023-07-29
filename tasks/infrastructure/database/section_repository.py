@@ -19,8 +19,7 @@ class SectionRepository(AbstractSectionRepository):
                 session.commit()
                 session.close()
             except IntegrityError as e:
-                set_log(e._message)
+                pass
             except ProgrammingError as e:
-                set_log("Ошибка! 2!!!")
-                # raise Exception(f"Запись \"{context.Name}\" уже существует в таблице \"bet_assistant_db.publc.sports\"")
+                pass
         return context

@@ -1,5 +1,5 @@
 from dotenv import dotenv_values
-from requests import post
+from requests import get
 
 
 config  = {
@@ -9,10 +9,7 @@ config  = {
 class TranslateRapidApi():
     Url: str
     Headers: dict
-    Payload: dict
-    SourceLanguage: str
-    TargetLanguage: str
-    Text: str
+    Querystring : dict
 
     def __init__(self, SourceLanguage, TargetLanguage, Text):
         self.Url = config["API_URL_TRANSLATE"]
@@ -20,16 +17,18 @@ class TranslateRapidApi():
             "X-RapidAPI-Key": f'{config["API_KEY_TRANSLATE"]}', 
             "X-RapidAPI-Host": f'{config["API_HOST_TRANSLATE"]}'
         }
-        self.Payload = {
-            "source_language": SourceLanguage,
-            "target_language": TargetLanguage,
-            "text": Text
+        self.Querystring = {
+            "langpair": f'{SourceLanguage}|{TargetLanguage}',
+            "q": Text,
+            "mt":"1",
+            "onlyprivate":"0",
+            "de":"a@b.c"
         }
 
     def text_translate_query(self):
-        query = post(
+        query = get(
             url=self.Url,
-            data=self.Payload,
+            params=self.Querystring,
             headers=self.Headers
         )
         return query.json()

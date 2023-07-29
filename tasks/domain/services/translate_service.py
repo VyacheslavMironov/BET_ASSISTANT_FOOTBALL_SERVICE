@@ -8,7 +8,7 @@ class TranslateService:
         self.out = dict()
     
     def serialize(self, param:dict) -> str or None:
-        return param['data']['translatedText'] if param['status'].lower() == "success" else None
+        return param['responseData']['translatedText'] if param['responseStatus'] == 200 else None
 
     def translate(self, data:str, langs=('ru', 'de', 'fr')) -> dict:
         self.out['en'] = data

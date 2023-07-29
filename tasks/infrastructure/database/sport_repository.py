@@ -3,7 +3,7 @@ from tasks.domain.entities.sport import Sport
 from tasks.infrastructure.database.db_context import engine, Session
 from tasks.infrastructure.journal.logging import set_log
 from sqlalchemy import text
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, ProgrammingError
 
 
 class SportRepository(AbstractSportRepository):
@@ -19,6 +19,7 @@ class SportRepository(AbstractSportRepository):
                 session.commit()
                 session.close()
             except IntegrityError as e:
-                set_log(e._message)
-                # raise Exception(f"Запись \"{context.Name}\" уже существует в таблице \"bet_assistant_db.publc.sports\"")
+                pass
+            except ProgrammingError as e:
+                pass
         return context

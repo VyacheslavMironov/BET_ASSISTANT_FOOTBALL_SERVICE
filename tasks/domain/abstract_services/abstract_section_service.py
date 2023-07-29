@@ -1,4 +1,3 @@
-import json
 from abc import ABC, abstractmethod
 from tasks.domain.entities.section import Section
 
